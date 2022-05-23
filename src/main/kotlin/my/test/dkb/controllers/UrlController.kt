@@ -1,6 +1,7 @@
 package my.test.dkb.controllers
 
 import my.test.dkb.model.UrlModel
+import my.test.dkb.service.ServiceInterface
 import my.test.dkb.service.UrlService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletRequest
 @RestController
 class UrlController(
     @Autowired
-    val service: UrlService
+    val service: ServiceInterface
 ) {
 
     @PostMapping("/urls")
