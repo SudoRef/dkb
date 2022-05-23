@@ -19,17 +19,22 @@ class UrlController(
     @PostMapping("/urls")
     fun addURL(@RequestParam("originalURL") originalURL: String): ResponseEntity<String> {
         val alias = service.generateHash()
-//        if (service.findAlias(alias).isEmpty()) {
+        if (service.findAlias(alias).isNullOrEmpty()) {
             service.saveAlias(UrlModel(alias, originalURL))
-//        }
-        return ResponseEntity.ok("saved $originalURL as $alias!")
+        }
+        return ResponseEntity.ok("saved $originalURL as $alias")
     }
 
     @GetMapping("/{alias}")
     fun getURL(@PathVariable("alias") alias: String, request: HttpServletRequest): RedirectView {
-        val originalURL = service.findAlias(alias).orEmpty()
+        var originalURL = service.findAlias(alias)
+        if(originalURL.isNullOrEmpty()){
+            originalURL = request.baseUrl
+        }
         return RedirectView(originalURL)
     }
 
+    val HttpServletRequest.baseUrl: String
+        get() = "$scheme://$serverName${if (serverName == "localhost") ":8080" else ""}"
 
 }
