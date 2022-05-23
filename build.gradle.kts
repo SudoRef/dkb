@@ -22,6 +22,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("org.apache.commons:commons-text:1.9")
+    implementation("junit:junit:4.13.1")
+	implementation("junit:junit:4.13.1")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

@@ -17,7 +17,7 @@ class UrlController(
 ) {
 
     @PostMapping("/urls")
-    fun addURL(@RequestParam("originalURL") originalURL: String): ResponseEntity<String> {
+    fun addURL(@RequestParam("original-url") originalURL: String): ResponseEntity<String> {
         var alias = service.generateHash(originalURL)
         if (service.findAlias(originalURL).isNullOrEmpty()) {
             service.saveAlias(UrlModel(alias, originalURL))
