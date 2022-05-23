@@ -18,17 +18,19 @@ class UrlController(
 
     @PostMapping("/urls")
     fun addURL(@RequestParam("originalURL") originalURL: String): ResponseEntity<String> {
-        val alias = service.generateHash()
-        if (service.findAlias(alias).isNullOrEmpty()) {
+        var alias: String? = service.generateHash()
+        if (service.findAlias(originalURL).isNullOrEmpty()) {
             service.saveAlias(UrlModel(alias, originalURL))
+        } else {
+            alias = service.findAlias(originalURL)
         }
-        return ResponseEntity.ok("saved $originalURL as $alias")
+        return ResponseEntity.ok("Original URL $originalURL saved as $alias")
     }
 
-    @GetMapping("/{alias}")
+    @GetMapping("/{alias:^\\w+}")
     fun getURL(@PathVariable("alias") alias: String, request: HttpServletRequest): RedirectView {
-        var originalURL = service.findAlias(alias)
-        if(originalURL.isNullOrEmpty()){
+        var originalURL = service.findUrl(alias)
+        if (originalURL.isNullOrEmpty()) {
             originalURL = request.baseUrl
         }
         return RedirectView(originalURL)

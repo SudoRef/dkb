@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.repository.MongoRepository
 
 
 interface UrlMappingRepo : MongoRepository<UrlModel, String> {
-    fun findByAlias(alias: String): UrlModel
-    fun existsByAlias(alias: String): Boolean
+    fun findByAlias(alias: String): UrlModel?
+    fun findByOriginalURL(url: String): UrlModel?
+    fun existsByOriginalURL(url: String): Boolean
+
 }

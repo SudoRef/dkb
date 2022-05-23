@@ -29,16 +29,19 @@ class UrlService(
 
     fun generateHash(): String {
         var hash = stringGenerator.generate(HASH_LENGTH)
-        while (urlsRepo.existsByAlias(hash)) {
+        while (urlsRepo.existsByOriginalURL(hash)) {
             hash = stringGenerator.generate(HASH_LENGTH)
         }
         return hash
     }
 
+    fun findAlias(url: String): String? {
+        return urlsRepo.findByOriginalURL(url)?.alias
+    }
 
-    fun findAlias(alias: String): String? {
-        val model = urlsRepo.findByAlias(alias)
-        return model.originalURL
+    fun findUrl(alias: String): String? {
+        val model: UrlModel? = urlsRepo.findByAlias(alias)
+        return model?.originalURL
     }
 
     fun saveAlias(model: UrlModel){
