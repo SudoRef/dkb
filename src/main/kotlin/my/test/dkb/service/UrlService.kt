@@ -14,10 +14,6 @@ class UrlService : ServiceInterface {
     @Autowired
     private lateinit var urlsRepo: UrlMappingRepo
 
-    companion object {
-        const val HASH_LENGTH: Int = 6
-    }
-
     private val stringGenerator = RandomStringGenerator.Builder()
         .withinRange('0'.code, 'z'.code)
         .filteredBy(CharacterPredicate { codePoint ->
@@ -28,7 +24,7 @@ class UrlService : ServiceInterface {
         .build()
 
     override fun generateHash(url: String): String? {
-        val hash = stringGenerator.generate(HASH_LENGTH)
+        val hash = stringGenerator.generate(ServiceInterface.HASH_LENGTH)
         if (urlsRepo.existsByOriginalURL(url)) {
             return urlsRepo.findByOriginalURL(url)?.alias
         }
