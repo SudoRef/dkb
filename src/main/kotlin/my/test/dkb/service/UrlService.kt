@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class UrlService(
+class UrlService : ServiceInterface {
+
     @Autowired
-    val urlsRepo: UrlMappingRepo
-) {
+    private lateinit var urlsRepo: UrlMappingRepo
 
     companion object {
         const val HASH_LENGTH: Int = 6
@@ -27,7 +27,7 @@ class UrlService(
         })
         .build()
 
-    fun generateHash(url: String): String? {
+    override fun generateHash(url: String): String? {
         val hash = stringGenerator.generate(HASH_LENGTH)
         if (urlsRepo.existsByOriginalURL(url)) {
             return urlsRepo.findByOriginalURL(url)?.alias
@@ -35,16 +35,16 @@ class UrlService(
         return hash
     }
 
-    fun findAlias(url: String): String? {
+    override fun findAlias(url: String): String? {
         return urlsRepo.findByOriginalURL(url)?.alias
     }
 
-    fun findUrl(alias: String): String? {
+    override fun findUrl(alias: String): String? {
         val model: UrlModel? = urlsRepo.findByAlias(alias)
         return model?.originalURL
     }
 
-    fun saveAlias(model: UrlModel){
+    override fun saveAlias(model: UrlModel){
         urlsRepo.save(model)
     }
 }
