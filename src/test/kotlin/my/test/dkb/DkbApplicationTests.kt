@@ -53,4 +53,11 @@ class DkbApplicationTests {
            .andExpect { redirectedUrl("http://localhost:8080") }
     }
 
+    @Test
+    fun get404Error() {
+        mockMvc.get("/asdf/asdf")
+            .andExpect { status { isNotFound() }}
+
+    }
+
 }
