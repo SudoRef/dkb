@@ -27,10 +27,10 @@ class UrlService(
         })
         .build()
 
-    fun generateHash(): String {
-        var hash = stringGenerator.generate(HASH_LENGTH)
-        while (urlsRepo.existsByOriginalURL(hash)) {
-            hash = stringGenerator.generate(HASH_LENGTH)
+    fun generateHash(url: String): String? {
+        val hash = stringGenerator.generate(HASH_LENGTH)
+        if (urlsRepo.existsByOriginalURL(url)) {
+            return urlsRepo.findByOriginalURL(url)?.alias
         }
         return hash
     }
