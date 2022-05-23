@@ -1,6 +1,6 @@
 package my.test.dkb.repos
 
-import my.test.dkb.model.UrlModel
+import my.test.dkb.models.UrlModel
 import org.springframework.data.mongodb.repository.MongoRepository
 
 

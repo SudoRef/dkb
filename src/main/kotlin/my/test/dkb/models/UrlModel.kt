@@ -1,4 +1,4 @@
-package my.test.dkb.model
+package my.test.dkb.models
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = "dkb")

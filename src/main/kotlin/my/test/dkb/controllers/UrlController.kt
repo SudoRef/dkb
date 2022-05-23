@@ -1,7 +1,7 @@
 package my.test.dkb.controllers
 
-import my.test.dkb.model.UrlModel
-import my.test.dkb.service.ServiceInterface
+import my.test.dkb.models.UrlModel
+import my.test.dkb.services.ServiceInterface
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component

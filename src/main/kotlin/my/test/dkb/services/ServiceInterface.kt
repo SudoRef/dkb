@@ -1,6 +1,6 @@
-package my.test.dkb.service
+package my.test.dkb.services
 
-import my.test.dkb.model.UrlModel
+import my.test.dkb.models.UrlModel
 
 
 interface ServiceInterface {

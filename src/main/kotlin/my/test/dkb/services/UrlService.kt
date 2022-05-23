@@ -1,6 +1,6 @@
-package my.test.dkb.service
+package my.test.dkb.services
 
-import my.test.dkb.model.UrlModel
+import my.test.dkb.models.UrlModel
 import my.test.dkb.repos.UrlMappingRepo
 import org.apache.commons.text.CharacterPredicate
 import org.apache.commons.text.CharacterPredicates
