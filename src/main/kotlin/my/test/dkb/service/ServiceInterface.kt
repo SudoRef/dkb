@@ -1,7 +1,6 @@
 package my.test.dkb.service
 
 import my.test.dkb.model.UrlModel
-import org.springframework.stereotype.Service
 
 
 interface ServiceInterface {
